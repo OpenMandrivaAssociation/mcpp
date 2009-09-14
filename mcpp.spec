@@ -6,7 +6,7 @@
 Name:		       	mcpp
 Summary:    		Alternative C/C++ preprocessor
 Version:    		2.7.2
-Release:    		%mkrel 1
+Release:    		%mkrel 2
 License:    		BSD
 Group:      		Development/C++
 Source:     		http://downloads.sourceforge.net/%name/%name-%version.tar.gz
