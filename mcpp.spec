@@ -1,15 +1,18 @@
 %define major		0
 %define libname		%mklibname %name %major
 %define develname	%mklibname %name -d
-%define staticdevelname	%mklibname %name -d -s
 
 Name:		       	mcpp
 Summary:    		Alternative C/C++ preprocessor
 Version:    		2.7.2
-Release:    		%mkrel 2
+Release:    		%mkrel 3
 License:    		BSD
 Group:      		Development/C++
 Source:     		http://downloads.sourceforge.net/%name/%name-%version.tar.gz
+# fedora patches
+Patch0:     		mcpp-manual.html.patch
+# From http://www.zeroc.com/forums/patches/4445-patch-1-mcpp-2-7-2-a.html
+Patch1:     		patch.mcpp.2.7.2.txt
 URL:        		http://mcpp.sourceforge.net/
 Requires:		%libname = %version-%release
 BuildRoot:  		%_tmppath/%name-%version-%release-buildroot
@@ -53,7 +56,7 @@ This package provides the libraries for mcpp.
 
 %files -n		%libname
 %defattr(-,root,root)
-%_libdir/*.so.*
+%_libdir/*.so.%{major}.*
 
 #-------------------------------------------------------------------------
 
@@ -73,27 +76,14 @@ This package contains development files for %name.
 %_includedir/*
 
 #-------------------------------------------------------------------------
-
-%package -n		%staticdevelname
-Summary:		Static development files for %name
-Group:			Development/Other
-Requires:		%develname = %version-%release
-Provides:		%name-static-devel = %version-%release
-
-%description -n		%staticdevelname
-This package contains static development files for %name.
-
-%files -n		%staticdevelname
-%defattr(-,root,root)
-%_libdir/*.a
-
-#-------------------------------------------------------------------------
 	
 %prep
 %setup -q
+%patch0 -p0 -b -z.euc-jp
+%patch1 -p1
 
 %build
-%configure --enable-mcpplib
+%configure --enable-mcpplib --disable-static
 %make 
 
 %install
