@@ -56,7 +56,7 @@ This package provides the libraries for mcpp.
 
 %files -n		%libname
 %defattr(-,root,root)
-%_libdir/*.so.%{major}.*
+%_libdir/*.so.%{major}*
 
 #-------------------------------------------------------------------------
 
@@ -81,6 +81,8 @@ This package contains development files for %name.
 %setup -q
 %patch0 -p0 -b -z.euc-jp
 %patch1 -p1
+
+autoreconf -fi
 
 %build
 %configure --enable-mcpplib --disable-static
