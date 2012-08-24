@@ -5,7 +5,7 @@
 Name:		       	mcpp
 Summary:    		Alternative C/C++ preprocessor
 Version:    		2.7.2
-Release:    		%mkrel 3
+Release:    		3
 License:    		BSD
 Group:      		Development/C++
 Source:     		http://downloads.sourceforge.net/%name/%name-%version.tar.gz
@@ -46,14 +46,6 @@ Group:			System/Libraries
 %description -n		%libname
 This package provides the libraries for mcpp.
 
-%if %mdkversion < 200900
-%post -p /sbin/ldconfig -n %libname
-%endif
-
-%if %mdkversion < 200900
-%postun -p /sbin/ldconfig -n %libname
-%endif
-
 %files -n		%libname
 %defattr(-,root,root)
 %_libdir/*.so.%{major}*
@@ -71,7 +63,6 @@ This package contains development files for %name.
 
 %files -n		%develname
 %defattr(-,root,root)
-%_libdir/*.la
 %_libdir/*.so
 %_includedir/*
 
@@ -89,9 +80,5 @@ autoreconf -fi
 %make 
 
 %install
-rm -rf %buildroot
 %makeinstall 
-
-%clean
-rm -rf %buildroot
 
