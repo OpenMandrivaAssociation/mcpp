@@ -5,7 +5,7 @@
 Name:		       	mcpp
 Summary:    		Alternative C/C++ preprocessor
 Version:    		2.7.2
-Release:    		3
+Release:    		5
 License:    		BSD
 Group:      		Development/C++
 Source:     		http://downloads.sourceforge.net/%name/%name-%version.tar.gz
@@ -15,7 +15,6 @@ Patch0:     		mcpp-manual.html.patch
 Patch1:     		patch.mcpp.2.7.2.txt
 URL:        		http://mcpp.sourceforge.net/
 Requires:		%libname = %version-%release
-BuildRoot:  		%_tmppath/%name-%version-%release-buildroot
 
 %description
 C/C++ preprocessor defines and expands macros and processes '#if',
@@ -32,7 +31,6 @@ mcpp, this package installs only a program named 'mcpp' which links
 shared library of mcpp and behaves independent from GCC.
 
 %files
-%defattr(-,root,root,-)
 %_bindir/*
 %_mandir/man1/*
 %_defaultdocdir/%name
@@ -82,3 +80,28 @@ autoreconf -fi
 %install
 %makeinstall 
 
+
+%changelog
+* Wed Apr 06 2011 Matthew Dawkins <mattydaw@mandriva.org> 2.7.2-3mdv2011.0
++ Revision: 651329
+- fixed file list
+- added autoreconf to fix libtool error
+- fixed malformed patch
+- rebuild
+- added fedora patches
+- disabled static build
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - rebuild
+
+* Sun Jan 04 2009 Jérôme Soyer <saispo@mandriva.org> 2.7.2-1mdv2009.1
++ Revision: 324860
+- update to new version 2.7.2
+
+* Fri Nov 07 2008 Michael Scherer <misc@mandriva.org> 2.7.1-1mdv2009.1
++ Revision: 300738
+- import mcpp
+
+
+* Wed Oct 22 2008 incubusss <mdv@incubusss.net> 2.7.1-1mdv2009.0
+- initial package
