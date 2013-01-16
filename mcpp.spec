@@ -8,13 +8,21 @@ Version:    		2.7.2
 Release:    		6
 License:    		BSD
 Group:      		Development/C++
-Source:     		http://downloads.sourceforge.net/%name/%name-%version.tar.gz
+Source0:     		http://downloads.sourceforge.net/%name/%name-%version.tar.gz
 # fedora patches
 Patch0:     		mcpp-manual.html.patch
 # From http://www.zeroc.com/forums/patches/4445-patch-1-mcpp-2-7-2-a.html
 Patch1:     		patch.mcpp.2.7.2.txt
+Patch2:			mcpp-automake-1.13.patch
 URL:        		http://mcpp.sourceforge.net/
 Requires:		%libname = %version-%release
+
+%track
+prog %name = {
+	url = http://sourceforge.net/projects/mcpp/
+	regex = %name-(__VER__)\.tar\.gz
+	version = %version
+}
 
 %description
 C/C++ preprocessor defines and expands macros and processes '#if',
@@ -70,6 +78,7 @@ This package contains development files for %name.
 %setup -q
 %patch0 -p0 -b -z.euc-jp
 %patch1 -p1
+%patch2 -p1 -b .am113~
 
 autoreconf -fi
 
