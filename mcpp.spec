@@ -5,7 +5,7 @@
 Summary:	Alternative C/C++ preprocessor
 Name:		mcpp
 Version:	2.7.2
-Release:	18
+Release:	19
 License:	BSD
 Group:		Development/C++
 Url:		http://mcpp.sourceforge.net/
