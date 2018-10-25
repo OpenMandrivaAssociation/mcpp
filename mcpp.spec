@@ -1,6 +1,6 @@
-%define major	0
-%define libname	%mklibname %{name} %major
-%define devname	%mklibname %{name} -d
+%define major 0
+%define libname %mklibname %{name} %major
+%define devname %mklibname %{name} -d
 
 Summary:	Alternative C/C++ preprocessor
 Name:		mcpp
@@ -15,13 +15,6 @@ Patch0:		mcpp-manual.html.patch
 # From http://www.zeroc.com/forums/patches/4445-patch-1-mcpp-2-7-2-a.html
 Patch1:		patch.mcpp.2.7.2.txt
 Patch2:		mcpp-automake-1.13.patch
-
-%track
-prog %{name} = {
-	url = http://sourceforge.net/projects/mcpp/
-	regex = %{name}-(__VER__)\.tar\.gz
-	version = %{version}
-}
 
 %description
 C/C++ preprocessor defines and expands macros and processes '#if',
@@ -47,31 +40,31 @@ This package provides the libraries for mcpp.
 %package -n %{devname}
 Summary:	Development files for %{name}
 Group:		Development/Other
-Requires:	%{name} = %{version}-%{release}
-Provides:	%{name}-devel = %{version}-%{release}
+Requires:	%{name} = %{EVRD}
+Provides:	%{name}-devel = %{EVRD}
 
 %description -n %{devname}
 This package contains development files for %{name}.
 
 %prep
-%setup -q
-%apply_patches
+%autosetup -p1
 
 autoreconf -fi
 
 %build
-%configure2_5x \
+%configure \
 	 --enable-mcpplib \
 	--disable-static
-%make 
+
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 
 %files
 %{_bindir}/*
 %{_mandir}/man1/*
-%{_defaultdocdir}/%{name}
+%{_docdir}/%{name}
 
 %files -n %{libname}
 %{_libdir}/libmcpp.so.%{major}*
@@ -79,4 +72,3 @@ autoreconf -fi
 %files -n %{devname}
 %{_libdir}/*.so
 %{_includedir}/*
-
