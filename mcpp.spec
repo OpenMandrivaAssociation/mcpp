@@ -1,20 +1,23 @@
 %define major 0
-%define libname %mklibname %{name} %major
+%define libname %mklibname %{name} %{major}
 %define devname %mklibname %{name} -d
 
 Summary:	Alternative C/C++ preprocessor
 Name:		mcpp
 Version:	2.7.2
-Release:	21
+Release:	22
 License:	BSD
 Group:		Development/C++
 Url:		http://mcpp.sourceforge.net/
 Source0:	http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
-# fedora patches
-Patch0:		mcpp-manual.html.patch
-# From http://www.zeroc.com/forums/patches/4445-patch-1-mcpp-2-7-2-a.html
-Patch1:		patch.mcpp.2.7.2.txt
-Patch2:		mcpp-automake-1.13.patch
+
+# (tpg) patches from Debian
+Patch1:		01-zeroc-fixes.patch
+Patch2:		02-gniibe-fixes.patch
+Patch3:		03-gniibe-fix-11.patch
+Patch4:		04-gniibe-fix-12.patch
+Patch5:		05-gniibe-fix-13.patch
+Patch6:		06-gniibe-fix-autotools.patch
 
 %description
 C/C++ preprocessor defines and expands macros and processes '#if',
@@ -49,11 +52,13 @@ This package contains development files for %{name}.
 %prep
 %autosetup -p1
 
+sed -i 's/-lmcpp/libmcpp.la/' src/Makefile.am
+
 autoreconf -fi
 
 %build
 %configure \
-	 --enable-mcpplib \
+	--enable-mcpplib \
 	--disable-static
 
 %make_build
@@ -63,8 +68,8 @@ autoreconf -fi
 
 %files
 %{_bindir}/*
-%{_mandir}/man1/*
-%{_docdir}/%{name}
+%doc %{_mandir}/man1/*
+%doc %{_docdir}/%{name}
 
 %files -n %{libname}
 %{_libdir}/libmcpp.so.%{major}*
