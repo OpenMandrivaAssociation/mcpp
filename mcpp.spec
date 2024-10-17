@@ -8,7 +8,7 @@ Version:	2.7.2
 Release:	23
 License:	BSD
 Group:		Development/C++
-Url:		http://mcpp.sourceforge.net/
+Url:		https://mcpp.sourceforge.net/
 Source0:	http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
 
 # (tpg) patches from Debian
