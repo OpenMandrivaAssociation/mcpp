@@ -19,6 +19,11 @@ Patch4:		04-gniibe-fix-12.patch
 Patch5:		05-gniibe-fix-13.patch
 Patch6:		06-gniibe-fix-autotools.patch
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 %description
 C/C++ preprocessor defines and expands macros and processes '#if',
 '#include' and some other directives.
